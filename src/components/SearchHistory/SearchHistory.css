@@ -1,0 +1,29 @@
+.search-history-container{
+    margin-top: 16px;
+    padding: 8px; 
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.history-details-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .history-details-container {
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+    }
+}
