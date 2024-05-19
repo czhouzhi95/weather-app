@@ -11,7 +11,7 @@ Responsiveness is achieved through the application's theme.js or media queries.
 - View search history and easily access previous searches
 - Dark and Light theme enabled
 
-To start, please run the following commands:
+To start, please run the following commands in order:
 
 ### `npm install`
 Some of the libraries used are:
