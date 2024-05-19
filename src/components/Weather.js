@@ -19,7 +19,7 @@ const Weather = () => {
   const [searchHistory, setSearchHistory] = useState([]);
 
   const checkIfCloudy = () =>
-    weather.weather[0].main.toLowerCase() === "clouds";
+    weather?.weather[0].main.toLowerCase() === "clouds";
 
   const generateUniqueId = (array) => {
     if (array.length === 0) {
@@ -101,14 +101,15 @@ const Weather = () => {
             ? "rgba(26, 26, 26, 0.5)"
             : "rgba(255, 255, 255, 0.1)",
           border: !isDarkMode && "1px solid rgba(255, 255, 255, 0.5)",
+          borderRadius:"40px"
         }}
       >
-        <Box
+        {weather && <Box
         className="weather-image-container"
           sx={{
             backgroundImage: `url(${checkIfCloudy() ? clouds : clear})`,
           }}
-        />
+        />}
         {weather && <WeatherDetails details={weather} />}
         <SearchHistory
           searchHistory={searchHistory}

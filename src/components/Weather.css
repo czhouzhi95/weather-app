@@ -6,30 +6,13 @@
   padding-right: 20%;
 }
 
-.search-container {
-  /* width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px; */
-}
-
 .search-result-container {
   margin-top: 100px;
   padding: 32px;
   width: 100%;
-  border-radius: 20px;
   position: relative;
 }
 
-.weather-info {
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-}
 
 .weather-image-container {
   background-size: contain;

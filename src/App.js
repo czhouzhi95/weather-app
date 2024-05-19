@@ -7,6 +7,7 @@ import Weather from "./components/Weather";
 import { DarkModeProvider, useDarkMode } from "./contexts/DarkModeContext";
 import backgroundImageDark from "./assets/bg-dark.png";
 import backgroundImageLight from "./assets/bg-light.png";
+import { ThemeToggleButton } from "./theme/ThemeToggleButton";
 
 const AppContent = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -32,9 +33,8 @@ const AppContent = () => {
             marginBottom: 2,
           }}
         >
-          <Button variant="contained" onClick={toggleDarkMode}>
-            Toggle to {isDarkMode ? "Light" : "Dark"} Mode
-          </Button>
+          
+          <ThemeToggleButton toggleAction={toggleDarkMode} isDarkMode={isDarkMode}/>
         </Box>
         <Weather />
       </Box>

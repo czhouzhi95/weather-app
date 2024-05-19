@@ -28,35 +28,42 @@ export const SearchHistory = ({
     >
       <Typography variant="details">Search History</Typography>
       {searchHistory.length > 0 ? (
-        searchHistory.map((row) => {
-          const { currentDateAndTime, id } = row;
-          const { name } = row.data;
-          const { country } = row.data.sys;
+        <Box sx={{overflow:"auto", maxHeight:"300px"}}>
+          {searchHistory.map((row) => {
+            const { currentDateAndTime, id } = row;
+            const { name } = row.data;
+            const { country } = row.data.sys;
 
-          return (
-            <Box className="search-history-container" sx={{background: (theme) => theme.palette.background.searchHistory}}>
-              <Box className="history-details-container">
-                <Typography variant="details">
-                  {name}, {country}
-                </Typography>
-                <Typography variant="searchHistoryDateAndTIme">
-                  {currentDateAndTime}
-                </Typography>
-              </Box>
+            return (
+              <Box
+                className="search-history-container"
+                sx={{
+                  background: (theme) => theme.palette.background.searchHistory,
+                }}
+              >
+                <Box className="history-details-container">
+                  <Typography variant="details">
+                    {name}, {country}
+                  </Typography>
+                  <Typography variant="searchHistoryDateAndTIme">
+                    {currentDateAndTime}
+                  </Typography>
+                </Box>
 
-              <Box className="action-button-container">
-                <SearchHistoryActionButton
-                  icon={isDarkMode ? <SearchIconDark /> : <SearchIconLight />}
-                  clickAction={()=>getWeather(name)}
-                />
-                <SearchHistoryActionButton
-                  icon={isDarkMode ? <DeleteIconDark /> : <DeleteIconLight />}
-                  clickAction={() => handleDeleteSearchHistory(id)}
-                />
+                <Box className="action-button-container">
+                  <SearchHistoryActionButton
+                    icon={isDarkMode ? <SearchIconDark /> : <SearchIconLight />}
+                    clickAction={() => getWeather(name)}
+                  />
+                  <SearchHistoryActionButton
+                    icon={isDarkMode ? <DeleteIconDark /> : <DeleteIconLight />}
+                    clickAction={() => handleDeleteSearchHistory(id)}
+                  />
+                </Box>
               </Box>
-            </Box>
-          );
-        })
+            );
+          })}
+        </Box>
       ) : (
         <Box
           sx={{
