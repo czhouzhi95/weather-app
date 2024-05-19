@@ -14,6 +14,7 @@ export const SearchHistory = ({
   searchHistory,
   getWeather,
   handleDeleteSearchHistory,
+  weather
 }) => {
 
   // To check current dark mode status
@@ -22,13 +23,13 @@ export const SearchHistory = ({
   return (
     <Box
       sx={{
-        marginTop: 2,
-        padding: 2,
-        borderRadius: "24px",
+        marginTop: weather? 2 : 0,
+        padding: 4,
+        borderRadius: weather ?"24px" : "40px",
         background: (theme) => theme.palette.background.searchBar,
       }}
     >
-      <Typography variant="details">Search History</Typography>
+      <Typography variant="details" fontWeight={800}>Search History</Typography>
       {searchHistory.length > 0 ? (
         <Box sx={{ overflow: "auto", maxHeight: "300px" }}>
           {searchHistory.map((row) => {
@@ -79,7 +80,7 @@ export const SearchHistory = ({
             alignItems: "center",
           }}
         >
-          <Typography variant="details">No History</Typography>
+          <Typography variant="details"fontWeight={500}>No records found</Typography>
         </Box>
       )}
     </Box>

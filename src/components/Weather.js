@@ -16,6 +16,8 @@ const Weather = () => {
   const { isDarkMode } = useDarkMode();
   // State for storing city name input by user
   const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+
   // State for storing weather data fetched from API
   const [weather, setWeather] = useState(null);
   // State for storing any error messages
@@ -38,13 +40,13 @@ const Weather = () => {
   };
 
   // Function to fetch weather data for the specified city
-  const getWeather = (city) => {
+  const getWeather = (city,country) => {
     if (!city) {
       setError("Please enter a city name.");
       return;
     }
 
-    getWeatherData({ city })
+    getWeatherData({ city, country })
       .then((response) => {
         if (response?.status === 200) {
           const currentDate = moment();
@@ -53,6 +55,7 @@ const Weather = () => {
           const additionalDetails = { currentDateAndTime, id };
           setWeather({ ...response.data, ...additionalDetails });
           setError("");
+          setCountry("")
           setSearchHistory((prevHistory) => {
             const updatedHistory = [
               ...prevHistory,
@@ -61,12 +64,12 @@ const Weather = () => {
             return updatedHistory;
           });
         } else {
-          setError("City not found or other error.");
+          setError("The city does not exist or it does not exist in this country.");
           setWeather(null);
         }
       })
       .catch((error) => {
-        setError("City not found or other error.");
+        setError("There is an error with the application. Please contact support!");
         setWeather(null);
       });
   };
@@ -75,6 +78,11 @@ const Weather = () => {
   const handleGetCity = (e) => {
     const { value } = e.target;
     setCity(value);
+  };
+
+  const handleGetCountry = (e) => {
+    const { value } = e.target;
+    setCountry(value);
   };
 
   // Function to delete a specific search history item by ID
@@ -92,8 +100,8 @@ const Weather = () => {
         alignItems="center"
         sx={{ width: "100%", height: "60px" }}
       >
-        <SearchBar city={city} handleGetCity={handleGetCity} />
-        <SearchButton city={city} getWeather={getWeather} />
+        <SearchBar city={city} country={country} handleGetCity={handleGetCity} handleGetCountry={handleGetCountry}/>
+        <SearchButton city={city} country={country} getWeather={getWeather} />
       </Box>
       {error && (
         <Typography color="error" variant="body2" sx={{ marginTop: 2 }}>
@@ -110,7 +118,7 @@ const Weather = () => {
           borderRadius: "40px",
         }}
       >
-        <Box sx={{ padding: 4 }}>
+        <Box sx={{ padding: weather ? 4 : 0  }}>
           {weather && (
             <Box
               className="weather-image-container"
@@ -121,6 +129,7 @@ const Weather = () => {
           )}
           {weather && <WeatherDetails details={weather} />}
           <SearchHistory
+            weather={weather}
             searchHistory={searchHistory}
             getWeather={getWeather}
             handleDeleteSearchHistory={handleDeleteSearchHistory}

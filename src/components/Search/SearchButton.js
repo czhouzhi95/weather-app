@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-export const SearchButton = ({ getWeather,city }) => {
+export const SearchButton = ({ getWeather,city,country }) => {
   return (
     <Box
       sx={{
@@ -12,11 +12,12 @@ export const SearchButton = ({ getWeather,city }) => {
         width: "60px",
         height: "100%",
         borderRadius: "20px",
+        cursor:"pointer",
         background: (theme) => theme.palette.background.buttonBox,
       }}
     >
       <SearchIcon
-        onClick={()=>getWeather(city)}
+        onClick={()=>getWeather(city,country)}
         sx={{ mcursor: "pointer", color: "white", fontSize: "30px" }}
       />
     </Box>
