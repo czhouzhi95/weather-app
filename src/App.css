@@ -13,3 +13,14 @@ body {
 button {
   margin-top: 20px;
 }
+.app-container {
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.theme-button-container{
+  display: flex;
+  justify-content: flex-end;
+}

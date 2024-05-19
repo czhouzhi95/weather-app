@@ -12,15 +12,22 @@ import clouds from "../assets/cloud.png";
 import clear from "../assets/sun.png";
 
 const Weather = () => {
+   // Context to get current darkMode status
   const { isDarkMode } = useDarkMode();
+  // State for storing city name input by user
   const [city, setCity] = useState("");
+  // State for storing weather data fetched from API
   const [weather, setWeather] = useState(null);
+  // State for storing any error messages
   const [error, setError] = useState("");
+  // State for storing search history
   const [searchHistory, setSearchHistory] = useState([]);
 
+  // Function to check if the weather is cloudy or others status
   const checkIfCloudy = () =>
     weather?.weather[0].main.toLowerCase() === "clouds";
 
+  // Function to generate a unique ID for search history rows
   const generateUniqueId = (array) => {
     if (array.length === 0) {
       return 1; // If the array is empty, the next available ID will be 1
@@ -30,6 +37,7 @@ const Weather = () => {
     return maxId + 1;
   };
 
+  // Function to fetch weather data for the specified city
   const getWeather = (city) => {
     if (!city) {
       setError("Please enter a city name.");
@@ -38,10 +46,8 @@ const Weather = () => {
 
     getWeatherData({ city })
       .then((response) => {
-        //if successful response with valid data
         if (response?.status === 200) {
           const currentDate = moment();
-          // Format the date and time to add into weather array
           const currentDateAndTime = currentDate.format("DD-MM-YYYY hh:mma");
           const id = generateUniqueId(searchHistory);
           const additionalDetails = { currentDateAndTime, id };
@@ -55,23 +61,23 @@ const Weather = () => {
             return updatedHistory;
           });
         } else {
-          // invalid data
           setError("City not found or other error.");
           setWeather(null);
         }
       })
       .catch((error) => {
-        // endpoint has error
         setError("City not found or other error.");
         setWeather(null);
       });
   };
 
+  // Function to handle city input change
   const handleGetCity = (e) => {
     const { value } = e.target;
     setCity(value);
   };
 
+  // Function to delete a specific search history item by ID
   const handleDeleteSearchHistory = (idToDelete) => {
     console.log(idToDelete);
     setSearchHistory((currentHistory) =>
@@ -101,21 +107,25 @@ const Weather = () => {
             ? "rgba(26, 26, 26, 0.5)"
             : "rgba(255, 255, 255, 0.1)",
           border: !isDarkMode && "1px solid rgba(255, 255, 255, 0.5)",
-          borderRadius:"40px"
+          borderRadius: "40px",
         }}
       >
-        {weather && <Box
-        className="weather-image-container"
-          sx={{
-            backgroundImage: `url(${checkIfCloudy() ? clouds : clear})`,
-          }}
-        />}
-        {weather && <WeatherDetails details={weather} />}
-        <SearchHistory
-          searchHistory={searchHistory}
-          getWeather={getWeather}
-          handleDeleteSearchHistory={handleDeleteSearchHistory}
-        />
+        <Box sx={{ padding: 4 }}>
+          {weather && (
+            <Box
+              className="weather-image-container"
+              sx={{
+                backgroundImage: `url(${checkIfCloudy() ? clouds : clear})`,
+              }}
+            />
+          )}
+          {weather && <WeatherDetails details={weather} />}
+          <SearchHistory
+            searchHistory={searchHistory}
+            getWeather={getWeather}
+            handleDeleteSearchHistory={handleDeleteSearchHistory}
+          />
+        </Box>
       </Paper>
     </Box>
   );

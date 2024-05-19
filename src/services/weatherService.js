@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Creating the base url for all service(s) to use
 const instance = axios.create({
   baseURL: "https://api.openweathermap.org",
 });

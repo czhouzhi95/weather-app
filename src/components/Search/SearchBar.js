@@ -1,6 +1,9 @@
 import { Box, IconButton, TextField, Typography } from "@mui/material";
+import { useDarkMode } from "../../contexts/DarkModeContext";
 
 export const SearchBar = ({ city, handleGetCity }) => {
+     // Context to get current darkMode status
+     const { isDarkMode } = useDarkMode();
   return (
     <Box
       sx={{
@@ -21,8 +24,9 @@ export const SearchBar = ({ city, handleGetCity }) => {
           marginBottom: 2,
           width: "100%",
           border: "none",
-          borderBottom: "none", // Optional: Add a bottom border for visual separation
-          outline: "none", // Remove the outline on focus
+          borderBottom: "none",
+          outline: "none",
+          color: isDarkMode ? "white" : "black"
         }}
       />
     </Box>

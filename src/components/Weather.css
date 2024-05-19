@@ -8,7 +8,6 @@
 
 .search-result-container {
   margin-top: 100px;
-  padding: 32px;
   width: 100%;
   position: relative;
 }
@@ -43,12 +42,12 @@
   .search-result-container {
     margin-top: 120px;
   }
+
   .weather-image-container {
     height: 160px;
     width: 160px;
     top: -60px;
-  right: 30px;
-
+    right: 30px;
   }
 }
 

@@ -4,8 +4,7 @@ import { useDarkMode } from "../../contexts/DarkModeContext";
 import "./WeatherDetails.css";
 
 export const WeatherDetails = ({ details }) => {
-  const { isDarkMode } = useDarkMode();
-
+  // Deconstructing the current weather details
   const { name, currentDateAndTime } = details;
   const { humidity, temp, temp_max, temp_min } = details.main;
   const { country } = details.sys;

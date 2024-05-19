@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider, CssBaseline, Button, Box } from "@mui/material";
+import { ThemeProvider, Box } from "@mui/material";
 
 import theme from "./theme/theme";
 import "./App.css";
@@ -10,31 +10,13 @@ import backgroundImageLight from "./assets/bg-light.png";
 import { ThemeToggleButton } from "./theme/ThemeToggleButton";
 
 const AppContent = () => {
+  // Context to get current darkMode status and the toggle
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-
   return (
     <ThemeProvider theme={theme(isDarkMode)}>
-      <CssBaseline />
-      <Box
-        style={{
-          backgroundImage: `url(${
-            isDarkMode ? backgroundImageDark : backgroundImageLight
-          })`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          minwidth: "100vw",
-          minHeight: "100vh",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginBottom: 2,
-          }}
-        >
-          
-          <ThemeToggleButton toggleAction={toggleDarkMode} isDarkMode={isDarkMode}/>
+      <Box className="app-container" style={{backgroundImage: `url(${isDarkMode ? backgroundImageDark : backgroundImageLight})`}}>
+        <Box className="theme-button-container">
+          <ThemeToggleButton toggleAction={toggleDarkMode} isDarkMode={isDarkMode} />
         </Box>
         <Weather />
       </Box>

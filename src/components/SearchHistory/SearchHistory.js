@@ -15,6 +15,8 @@ export const SearchHistory = ({
   getWeather,
   handleDeleteSearchHistory,
 }) => {
+
+  // To check current dark mode status
   const { isDarkMode } = useDarkMode();
 
   return (
@@ -28,7 +30,7 @@ export const SearchHistory = ({
     >
       <Typography variant="details">Search History</Typography>
       {searchHistory.length > 0 ? (
-        <Box sx={{overflow:"auto", maxHeight:"300px"}}>
+        <Box sx={{ overflow: "auto", maxHeight: "300px" }}>
           {searchHistory.map((row) => {
             const { currentDateAndTime, id } = row;
             const { name } = row.data;
@@ -36,6 +38,7 @@ export const SearchHistory = ({
 
             return (
               <Box
+                key={id}
                 className="search-history-container"
                 sx={{
                   background: (theme) => theme.palette.background.searchHistory,
